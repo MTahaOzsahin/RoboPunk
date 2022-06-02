@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 3722820544526581392}
   - component: {fileID: 3722820544526581393}
   m_Layer: 0
-  m_Name: Boss Run
+  m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e260f8423ee4394481965d74a1ac9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
 --- !u!114 &3722820544526581395
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,23 @@ public class buttonController : MonoBehaviour
 
     Health playerHealth;
 
+    //          Power ups list
+    //bL.onClick.AddListener(() => fireRate(-0.3f));
+    //bL.onClick.AddListener(() => SpeedSet(-0.3f));
+    //bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
+    //bL.onClick.AddListener(() => setHealth(3));
+    //bL.onClick.AddListener(() => setXpGain(3));
+    //bL.onClick.AddListener(() => SetDmg(3));
+    //bL.onClick.AddListener(() => setBulletSize(3));  Çýkarýldý...
+
+    //bR.onClick.AddListener(() => fireRate(-0.3f));
+    //bR.onClick.AddListener(() => SpeedSet(-0.3f));
+    //bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
+    //bR.onClick.AddListener(() => setHealth(3));
+    //bR.onClick.AddListener(() => setXpGain(3));
+    //bR.onClick.AddListener(() => SetDmg(3));
+    //bR.onClick.AddListener(() => setBulletSize(3));    Çýkarýldý...
+
     private void Start()
     {
         playerHealth = player.GetComponent<Health>();
@@ -25,42 +42,23 @@ public class buttonController : MonoBehaviour
 
     private void OnEnable()
     {
-        //int caseNum = Random.Range(0, 9); 
-        int caseNum = 0;
+        int caseNum = Random.Range(0, 9);
         PlayerController.Instance.shoot = false;
         Time.timeScale = 0;
-        //bL.onClick.AddListener(() => fireRate(-0.3f));
-        //bL.onClick.AddListener(() => SpeedSet(-0.3f));
-        //bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
-        //bL.onClick.AddListener(() => setHealth(3));
-        //bL.onClick.AddListener(() => setXpGain(3));
-        //bL.onClick.AddListener(() => SetDmg(3));
-        //bL.onClick.AddListener(() => setBulletSize(3));  Çýkarýldý...
-
-        //bR.onClick.AddListener(() => fireRate(-0.3f));
-        //bR.onClick.AddListener(() => SpeedSet(-0.3f));
-        //bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
-        //bR.onClick.AddListener(() => setHealth(3));
-        //bR.onClick.AddListener(() => setXpGain(3));
-        //bR.onClick.AddListener(() => SetDmg(3));
-        //bR.onClick.AddListener(() => setBulletSize(3));    Çýkarýldý...
-
+        
         switch (caseNum)
         {
             case 0:
                 blText.text = "Fire Rate -0.3 \n\n Movement Speed -1";
                 brText.text = "Dmg +3 \n\n Health -3";
-                bL.onClick.AddListener(() => fireRate(-0.3f));
+                bL.onClick.AddListener(() => FireRate(-0.3f));
                 bL.onClick.AddListener(() => SpeedSet(-1f));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-               
-
-
                 bR.onClick.AddListener(() => SetDmg(3));
-                bR.onClick.AddListener(() => setHealth(-3));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => SetHealth(-3));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                
                 break;
@@ -69,125 +67,129 @@ public class buttonController : MonoBehaviour
                 brText.text = "XpGain +3 \n\n Movement Speed -1";
                 bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
                 bL.onClick.AddListener(() => SpeedSet(-1f));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => setXpGain(3));
+                bR.onClick.AddListener(() => SetXpGain(3));
                 bR.onClick.AddListener(() => SpeedSet(-1f));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 2:
                 blText.text = "Movement Speed +1 \n\n Fire Rate +0.3";
                 brText.text = "Health +3 \n\n XpGain -2";
                 bL.onClick.AddListener(() => SpeedSet(1f));
-                bL.onClick.AddListener(() => fireRate(0.3f));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(() => FireRate(0.3f));
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => setHealth(3));
-                bR.onClick.AddListener(() => setXpGain(-2));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => SetHealth(3));
+                bR.onClick.AddListener(() => SetXpGain(-2));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 3:
                 blText.text = "Three Barrel \n\n XpGain -2";
                 brText.text = "Fire Rate -0.3 \n\n One Barrel";
                 bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.three));
-                bL.onClick.AddListener(() => setXpGain(-2));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(() => SetXpGain(-2));
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => fireRate(-0.3f));
+                bR.onClick.AddListener(() => FireRate(-0.3f));
                 bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.one));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 4:
                 blText.text = "XpGain +2 \n\n Movement Speed -1";
                 brText.text = "Dmg +3 \n\n Fire Rate +0.3";
-                bL.onClick.AddListener(() => setXpGain(2));
+                bL.onClick.AddListener(() => SetXpGain(2));
                 bL.onClick.AddListener(() => SpeedSet(-1f));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali
 
                 bR.onClick.AddListener(() => SetDmg(3));
-                bR.onClick.AddListener(() => fireRate(0.3f));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => FireRate(0.3f));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 5:
                 blText.text = "Health +3 \n\n Movement Speed -1";
                 brText.text = "Two Barrel \n\n Fire Rate +0.3";
-                bL.onClick.AddListener(() => setHealth(3));
+                bL.onClick.AddListener(() => SetHealth(3));
                 bL.onClick.AddListener(() => SpeedSet(-1f));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
                 bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
-                bR.onClick.AddListener(() => fireRate(0.3f));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => FireRate(0.3f));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 6:
                 blText.text = "Dmg +3 \n\n XpGain -2";
                 brText.text = "Three Barrel \n\n Health -3";
                 bL.onClick.AddListener(() => SetDmg(3));
-                bL.onClick.AddListener(() => setXpGain(-2));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(() => SetXpGain(-2));
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
                 bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.three));
-                bR.onClick.AddListener(() => setHealth(-3));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => SetHealth(-3));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 7:
                 blText.text = "Fire Rate -0.3 \n\n XpGain -2";
                 brText.text = "Health +3 \n\n One Barrel";
-                bL.onClick.AddListener(() => fireRate(-0.3f));
-                bL.onClick.AddListener(() => setXpGain(-2));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(() => FireRate(-0.3f));
+                bL.onClick.AddListener(() => SetXpGain(-2));
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => setHealth(3));
+                bR.onClick.AddListener(() => SetHealth(3));
                 bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.one));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
             case 8:
                 blText.text = "Fire Rate -0.3 \n\n Dmg - 3";
                 brText.text = "Two Barrel \n\n XpGain -2";
-                bL.onClick.AddListener(() => fireRate(-0.3f));
+                bL.onClick.AddListener(() => FireRate(-0.3f));
                 bL.onClick.AddListener(() => SetDmg(-3));
-                bL.onClick.AddListener(setGameSpeed);// her case de olmali
+                bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
                 bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
-                bR.onClick.AddListener(() => setXpGain(-2));
-                bR.onClick.AddListener(setGameSpeed);// her case de olmali
+                bR.onClick.AddListener(() => SetXpGain(-2));
+                bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
-
-
             default:
                 break;
         }
     }
 
-    public void fireRate(float fireRate)
+    private void OnDisable()
     {
+        PlayerController.Instance.shoot = true;
+        Time.timeScale = 1;
 
+        bR.onClick.RemoveAllListeners();
+        bL.onClick.RemoveAllListeners();
+    }
+
+    public void FireRate(float fireRate)
+    {
         if (fireRate < 0)
         {
-            if (PlayerController.Instance.fireRate < Mathf.Abs(fireRate))
+            if (PlayerController.Instance.fireRate - Mathf.Abs(fireRate) <= 0.1f)
             {
                 return;
             }
         }
         PlayerController.Instance.fireRate += fireRate;
-        Debug.Log("b");
-
     }
 
     public void SpeedSet(float moveSpeed)
@@ -197,8 +199,6 @@ public class buttonController : MonoBehaviour
             return;
         }
         PlayerController.Instance.moveSpeed += moveSpeed;
-        Debug.Log("c");
-
     }
 
     public void BarrelSet(PlayerController.BarrelCount barrel)
@@ -206,7 +206,7 @@ public class buttonController : MonoBehaviour
         PlayerController.Instance.barrelCount = barrel;
     }
 
-    public void setHealth(int health)
+    public void SetHealth(int health)
     {
         if (health < 0)
         {
@@ -216,8 +216,6 @@ public class buttonController : MonoBehaviour
             }
         }
         playerHealth.currentHealth += health;
-        Debug.Log("d");
-
 
         if (playerHealth.currentHealth > playerHealth.maxHealth)
         {
@@ -226,7 +224,7 @@ public class buttonController : MonoBehaviour
         }
     }
 
-    public void setXpGain(float xpGain)
+    public void SetXpGain(float xpGain)
     {
         if (xpGain < 0)
         {
@@ -237,7 +235,7 @@ public class buttonController : MonoBehaviour
         }
         PlayerController.Instance.xpGain += xpGain;
     }
-    public void setGameSpeed()
+    public void SetGameSpeed()
     {
         Time.timeScale = 1f;
     }
@@ -259,16 +257,7 @@ public class buttonController : MonoBehaviour
         foreach (var item in objectPool.SharedInstance.pooledObjects)
         {
             item.GetComponent<Damage>().damage += dmg;
-            Debug.Log("e");
-
         }
     }
 
-    //public void setBulletSize(float size)
-    //{
-    //    foreach (var item in objectPool.SharedInstance.pooledObjects)
-    //    {
-    //        item.transform.localScale = new Vector3(size, size, size);
-    //    }
-    //}
 }

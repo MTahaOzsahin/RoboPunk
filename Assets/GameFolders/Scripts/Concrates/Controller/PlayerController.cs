@@ -27,8 +27,9 @@ namespace Kajujam.Concrates.Controller
 
         public Slider slider;
 
-        
-        
+
+        float turnSmoothVelocity;
+        [SerializeField] Transform cam;
 
         public enum BarrelCount { one, two, three }
         public BarrelCount barrelCount;
@@ -55,7 +56,6 @@ namespace Kajujam.Concrates.Controller
             health = GetComponent<Health>();
             damage = GetComponent<Damage>();
             objPool = GetComponent<objectPool>();
-
         }
 
         private void Start()
@@ -69,13 +69,12 @@ namespace Kajujam.Concrates.Controller
         }
         private void FixedUpdate()
         {
-            Movement(horizontal);
+            //Movement(horizontal);
             LevelSystem();
         }
         private void Update()
         {
-            timer += Time.deltaTime;
-            Rotatiton();
+            MovementAndRotation();
             FireBullet();
             OnPlayerDeadLoadScene();
         }
@@ -85,7 +84,7 @@ namespace Kajujam.Concrates.Controller
             if (experience >= experienceToNextLevel)
             {
                 playerLevel++;
-                experienceToNextLevel += 50;
+                experienceToNextLevel += 150;
                 uiElement.SetActive(true);
             }
         }
@@ -104,25 +103,51 @@ namespace Kajujam.Concrates.Controller
             } 
         }
 
-        public void Rotatiton()
+        public void MovementAndRotation()
         {
-            if (Time.timeScale > 0)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hitInfo;
-                    if (Physics.Raycast(rayOrigin, out hitInfo))
-                    {
-                        if (hitInfo.collider != null)
-                        {
-                            Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-                            transform.LookAt(newP);
-                        }
-                    }
+            GetAxis();
 
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            float turnSmoothTime = 0.1f;
+            
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                
+                if (!health.IsDead)
+                {
+                    transform.position += moveDirection.normalized  * Time.deltaTime * moveSpeed;
                 }
+
             }
+
+            
+            
+            
+
+            //if (Time.timeScale > 0)
+            //{
+            //    if (Input.GetMouseButton(0))
+            //    {
+            //        Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //        RaycastHit hitInfo;
+            //        if (Physics.Raycast(rayOrigin, out hitInfo))
+            //        {
+            //            if (hitInfo.collider != null)
+            //            {
+            //                Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+            //                transform.LookAt(newP);
+            //            }
+            //        }
+            //    }
+            //}
             //if (Time.timeScale > 0)
             //{
             //    Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -131,17 +156,28 @@ namespace Kajujam.Concrates.Controller
             //    {
             //        if (hitInfo.collider != null)
             //        {
-            //            Vector3 newP = new Vector3(Input.mousePosition.x,transform.position.y,Input.mousePosition.z);
-            //            transform.LookAt(Input.mousePosition);
+            //            Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+            //            transform.LookAt(newP);
             //        }
             //    }
-
-
             //}
+            //if (Time.timeScale > 0)
+            //{
+            //    Ray rayOrigin = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+            //    RaycastHit hitPoint;
 
+            //    if (Physics.Raycast(rayOrigin, out hitPoint))
+            //    {
+            //        if (hitPoint.collider != null)
+            //        {
+            //            transform.LookAt(hitPoint.point);
+            //        }
+            //    }
+            //}
         }
         public void FireBullet()
         {
+            timer += Time.deltaTime;
             GameObject bullets;
             GameObject bullets2;
             GameObject bullets3;
@@ -154,7 +190,6 @@ namespace Kajujam.Concrates.Controller
             {
                 shoot = false;
             }
-
 
             switch (barrelCount)
             {
@@ -215,7 +250,6 @@ namespace Kajujam.Concrates.Controller
                 health.TakingHit(collision.gameObject.GetComponent<Damage>());
                 setSlider();
             }
-
         }
 
         public void sliderMax()
@@ -233,7 +267,6 @@ namespace Kajujam.Concrates.Controller
             {
                 StartCoroutine(OnPlayerDeadAction());
             }
-
         }
         public IEnumerator OnPlayerDeadAction()
         {
