@@ -100,7 +100,7 @@ namespace Kajujam.Concrates.Controller
             {
                 transform.position += Vector3.right * horizontal * Time.deltaTime * moveSpeed;
                 transform.position += Vector3.forward * vertical * Time.deltaTime * moveSpeed;
-            } 
+            }
         }
 
         public void MovementAndRotation()
@@ -110,9 +110,9 @@ namespace Kajujam.Concrates.Controller
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
             float turnSmoothTime = 0.1f;
-            
 
-            if (direction.magnitude >= 0.1f)
+
+            if (direction.magnitude >= 0.1f && !health.IsDead)
             {
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -120,17 +120,13 @@ namespace Kajujam.Concrates.Controller
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                
-                if (!health.IsDead)
-                {
-                    transform.position += moveDirection.normalized  * Time.deltaTime * moveSpeed;
-                }
+
+                transform.position += moveDirection.normalized * Time.deltaTime * moveSpeed;
 
             }
 
-            
-            
-            
+
+
 
             //if (Time.timeScale > 0)
             //{

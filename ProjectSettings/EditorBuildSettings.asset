@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Berkay.unity
-    guid: 2c86e356e4b1b4149beaaa80403c2e06
+    path: Assets/Scenes/TpsDeneme.unity
+    guid: e39d1ace82ae6a04190a7a45d07dc7b3
   m_configObjects: {}
