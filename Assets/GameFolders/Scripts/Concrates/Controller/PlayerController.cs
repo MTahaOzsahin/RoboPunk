@@ -8,8 +8,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 namespace Kajujam.Concrates.Controller
 {
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerController : singleton<PlayerController>
     {
         IPlayerInputs pcInputs;
@@ -24,12 +26,33 @@ namespace Kajujam.Concrates.Controller
         float playerLevel;
         float experience;
         public  float experienceToNextLevel = 100;
-
         public Slider slider;
 
 
+        private CharacterController characterController;
+        private Vector3 playerVelocity;
+        //private bool groundedPlayer;
+        [SerializeField]
+        private float playerSpeed = 10f;
+        //[SerializeField]
+        //private float jumpHeight = 1.0f;
+        [SerializeField]
+        private float gravityValue = -9.81f;
+
+        private InputManager inputManager;
+        private Transform cameraTransform;
+
+
+
+
+
+
+
+
+
+
         float turnSmoothVelocity;
-        [SerializeField] Transform cam;
+        //[SerializeField] Transform cam;
 
         public enum BarrelCount { one, two, three }
         public BarrelCount barrelCount;
@@ -52,7 +75,7 @@ namespace Kajujam.Concrates.Controller
 
         private void Awake()
         {
-            pcInputs = new PCInputs();
+            //pcInputs = new PCInputs();
             health = GetComponent<Health>();
             damage = GetComponent<Damage>();
             objPool = GetComponent<objectPool>();
@@ -62,6 +85,10 @@ namespace Kajujam.Concrates.Controller
         {
             sliderMax();
             setSlider();
+
+            characterController = GetComponent<CharacterController>();
+            inputManager = InputManager.Instance;
+            cameraTransform = Camera.main.transform;
         }
         private void OnEnable()
         {
@@ -74,8 +101,10 @@ namespace Kajujam.Concrates.Controller
         }
         private void Update()
         {
-            MovementAndRotation();
-            FireBullet();
+            //MovementAndRotation();
+            PlayerControlsInputSystem();
+
+            //FireBullet();
             OnPlayerDeadLoadScene();
         }
         public void LevelSystem()
@@ -90,40 +119,40 @@ namespace Kajujam.Concrates.Controller
         }
         void GetAxis()
         {
-            horizontal = pcInputs.Horizontal;
-            vertical = pcInputs.Vertical;
+            //horizontal = pcInputs.Horizontal;
+            //vertical = pcInputs.Vertical;
         }
         public void Movement(float horizontal)
         {
-            GetAxis();
-            if (!health.IsDead)
-            {
-                transform.position += Vector3.right * horizontal * Time.deltaTime * moveSpeed;
-                transform.position += Vector3.forward * vertical * Time.deltaTime * moveSpeed;
-            }
+            //GetAxis();
+            //if (!health.IsDead)
+            //{
+            //    transform.position += Vector3.right * horizontal * Time.deltaTime * moveSpeed;
+            //    transform.position += Vector3.forward * vertical * Time.deltaTime * moveSpeed;
+            //}
         }
 
         public void MovementAndRotation()
         {
-            GetAxis();
+            //GetAxis();
 
-            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+            //Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-            float turnSmoothTime = 0.1f;
+            //float turnSmoothTime = 0.1f;
 
 
-            if (direction.magnitude >= 0.1f && !health.IsDead)
-            {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            //if (direction.magnitude >= 0.1f && !health.IsDead)
+            //{
+            //    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            //    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            //    transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            //    Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-                transform.position += moveDirection.normalized * Time.deltaTime * moveSpeed;
+            //    transform.position += moveDirection.normalized * Time.deltaTime * moveSpeed;
 
-            }
+            //}
 
 
 
@@ -170,6 +199,34 @@ namespace Kajujam.Concrates.Controller
             //        }
             //    }
             //}
+        }
+        public void PlayerControlsInputSystem()
+        {
+            //groundedPlayer = controller.isGrounded;
+            if (/*groundedPlayer && */ playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+            }
+
+            Vector2 movement = inputManager.GetPLayerMovement();
+            Vector3 move = new Vector3(movement.x , 0f , movement.y);
+            move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+            move.y = 0f;
+            characterController.Move(move * Time.deltaTime * playerSpeed);
+
+            //if (move != Vector3.zero)
+            //{
+            //    gameObject.transform.forward = move;
+            //}
+
+            // Changes the height position of the player..
+            //if (Input.GetButtonDown("Jump") && groundedPlayer)
+            //{
+            //    playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            //}
+
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            characterController.Move(playerVelocity * Time.deltaTime);
         }
         public void FireBullet()
         {

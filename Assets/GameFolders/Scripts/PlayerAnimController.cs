@@ -19,14 +19,14 @@ public class PlayerAnimController : MonoBehaviour
     
     void Start()
     {
-        pcInputs = new PCInputs();
+        //pcInputs = new PCInputs();
         health = PlayerController.Instance.gameObject.GetComponent<Health>();
     }
 
 
     void Update()
     {
-        GetAxis();
+        //GetAxis();
         if (horizontal != 0 || vertical != 0)
         {
             playerAnimator.SetBool("shootBool", true);
@@ -41,14 +41,14 @@ public class PlayerAnimController : MonoBehaviour
             playerAnimator.SetBool("deathBool", true);
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            playerAnimator.SetBool("shootBool", true);
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            playerAnimator.SetBool("shootBool", true);
-        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    playerAnimator.SetBool("shootBool", true);
+        //}
+        //else if (Input.GetMouseButton(1))
+        //{
+        //    playerAnimator.SetBool("shootBool", true);
+        //}
     }
 
     void GetAxis()

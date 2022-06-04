@@ -17,27 +17,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.74
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97766787
+      value: 0.99838924
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.21015614
+      value: 0.056736242
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.000000030768824
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -2.0502595e-10
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561458, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -53,7 +53,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7867038790688561461, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
       propertyPath: m_Name
-      value: Main Camera
+      value: MainCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8575771798230981181, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
+    - {fileID: 420780184, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 77920072ab47f8847bec292c23c53ef8, type: 3}

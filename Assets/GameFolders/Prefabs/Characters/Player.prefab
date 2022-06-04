@@ -2353,12 +2353,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2606472133337762878}
   - component: {fileID: 2568940632876788873}
+  - component: {fileID: 919132149366397784}
   - component: {fileID: 2568940632876788876}
   - component: {fileID: 2568940632876788878}
   - component: {fileID: 2568940632876788872}
   - component: {fileID: 2568940632876788875}
   - component: {fileID: 2568940632876788874}
-  - component: {fileID: 919132149366397784}
+  - component: {fileID: 6427343373722470427}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2441,6 +2442,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.696002, z: 1.2701616}
   m_Center: {x: 0, y: 1.348001, z: 0.254539}
+--- !u!54 &919132149366397784
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415940962075874948}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!95 &2568940632876788876
 Animator:
   serializedVersion: 3
@@ -2520,6 +2537,8 @@ MonoBehaviour:
   shoot: 1
   experienceToNextLevel: 100
   slider: {fileID: 0}
+  playerSpeed: 2
+  gravityValue: -9.81
   barrelCount: 0
   playerBarrelPositionMiddle: {fileID: 2568940634375633208}
   playerBarrelPositionLeft: {fileID: 2568940634313768079}
@@ -2528,22 +2547,24 @@ MonoBehaviour:
   bulletClip: {fileID: 8300000, guid: 256bf8b6b8e388940896d77209a9489f, type: 3}
   playerDeadClip: {fileID: 8300000, guid: b66a2d505a323654e9a6f607964c4a1e, type: 3}
   moveSpeed: 10
---- !u!54 &919132149366397784
-Rigidbody:
+--- !u!143 &6427343373722470427
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3415940962075874948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Height: 3.13
+  m_Radius: 0.38
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 1.69, z: 0}
 --- !u!1 &3437042911647544918
 GameObject:
   m_ObjectHideFlags: 0

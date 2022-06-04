@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Kajujam.Concrates.Inputs
 {
-    public class PCInputs : IPlayerInputs
+    public class PCInputs  /* IPlayerInputs */
     {
-        public float Horizontal => Input.GetAxis("Horizontal");
-        public float Vertical => Input.GetAxis("Vertical");
+        //public float Horizontal => Input.GetAxis("Horizontal");
+        //public float Vertical => Input.GetAxis("Vertical");
     }
 }
