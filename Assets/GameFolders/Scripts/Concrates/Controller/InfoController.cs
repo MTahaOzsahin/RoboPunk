@@ -29,18 +29,18 @@ namespace Kajujam.Concrates.Controller
 
         void ShowInfo()
         {
-            playerFireRate = PlayerController.Instance.fireRate;
+            playerFireRate = PlayerFpsController.Instance.fireRate;
             playerFireRate = Mathf.Round(playerFireRate * 100.0f) * 0.01f;
 
 
-            moveText.text = PlayerController.Instance.moveSpeed.ToString();
+            moveText.text = PlayerFpsController.Instance.moveSpeed.ToString();
             fireText.text = playerFireRate.ToString();
-            damageText.text = objectPool.SharedInstance.pooledObjects[0].GetComponent<Damage>().damage.ToString();
-            barrelText.text = PlayerController.Instance.barrelCount.ToString().ToTitleCase();
-            xpGainText.text = PlayerController.Instance.xpGain.ToString();
-            currentExpText.text = PlayerController.Instance.exp.ToString();
-            nextLevelText.text = PlayerController.Instance.experienceToNextLevel.ToString();
-            currentHealthText.text = PlayerController.Instance.GetComponent<Health>().currentHealth.ToString();
+            damageText.text = ObjectPool.SharedInstance.pooledObjects[0].GetComponent<Damage>().damage.ToString();
+            barrelText.text = PlayerFpsController.Instance.barrelCount.ToString().ToTitleCase();
+            xpGainText.text = PlayerFpsController.Instance.xpGain.ToString();
+            currentExpText.text = PlayerFpsController.Instance.exp.ToString();
+            nextLevelText.text = PlayerFpsController.Instance.experienceToNextLevel.ToString();
+            currentHealthText.text = PlayerFpsController.Instance.GetComponent<Health>().currentHealth.ToString();
         }
     }
 }

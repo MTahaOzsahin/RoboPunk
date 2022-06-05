@@ -7,7 +7,7 @@ namespace Kajujam.Concrates.Controller
 {
     public class SpawnerController : MonoBehaviour
     {
-        objectPool objPool;
+        ObjectPool objPool;
         GameObject enemyGameObject;
 
         float timeLeft = 10;
@@ -16,7 +16,7 @@ namespace Kajujam.Concrates.Controller
 
         private void Awake()
         {
-            objPool = GetComponent<objectPool>();
+            objPool = GetComponent<ObjectPool>();
         }
         private void Update()
         {

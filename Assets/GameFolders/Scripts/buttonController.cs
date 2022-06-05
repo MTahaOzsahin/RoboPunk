@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class buttonController : MonoBehaviour
+public class ButtonController : MonoBehaviour
 {
     [SerializeField]
     Button bL, bR;
@@ -43,7 +43,8 @@ public class buttonController : MonoBehaviour
     private void OnEnable()
     {
         int caseNum = Random.Range(0, 9);
-        PlayerController.Instance.shoot = false;
+       
+        PlayerFpsController.Instance.shoot = false;
         Time.timeScale = 0;
         
         switch (caseNum)
@@ -60,12 +61,11 @@ public class buttonController : MonoBehaviour
                 bR.onClick.AddListener(() => SetHealth(-3));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
-               
                 break;
             case 1:
                 blText.text = "Two Barrel \n\n Movement Speed -1";
                 brText.text = "XpGain +3 \n\n Movement Speed -1";
-                bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
+                bL.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.two));
                 bL.onClick.AddListener(() => SpeedSet(-1f));
                 bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
@@ -91,13 +91,13 @@ public class buttonController : MonoBehaviour
             case 3:
                 blText.text = "Three Barrel \n\n XpGain -2";
                 brText.text = "Fire Rate -0.3 \n\n One Barrel";
-                bL.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.three));
+                bL.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.three));
                 bL.onClick.AddListener(() => SetXpGain(-2));
                 bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
                 bR.onClick.AddListener(() => FireRate(-0.3f));
-                bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.one));
+                bR.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.one));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
@@ -122,7 +122,7 @@ public class buttonController : MonoBehaviour
                 bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
+                bR.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.two));
                 bR.onClick.AddListener(() => FireRate(0.3f));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
@@ -135,7 +135,7 @@ public class buttonController : MonoBehaviour
                 bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.three));
+                bR.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.three));
                 bR.onClick.AddListener(() => SetHealth(-3));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
@@ -149,7 +149,7 @@ public class buttonController : MonoBehaviour
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
                 bR.onClick.AddListener(() => SetHealth(3));
-                bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.one));
+                bR.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.one));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
                 break;
@@ -161,7 +161,7 @@ public class buttonController : MonoBehaviour
                 bL.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bL.onClick.AddListener(DisableSelf);// her case de olmali 
 
-                bR.onClick.AddListener(() => BarrelSet(PlayerController.BarrelCount.two));
+                bR.onClick.AddListener(() => BarrelSet(PlayerFpsController.BarrelCount.two));
                 bR.onClick.AddListener(() => SetXpGain(-2));
                 bR.onClick.AddListener(SetGameSpeed);// her case de olmali
                 bR.onClick.AddListener(DisableSelf);// her case de olmali 
@@ -173,7 +173,7 @@ public class buttonController : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.Instance.shoot = true;
+        PlayerFpsController.Instance.shoot = true;
         Time.timeScale = 1;
 
         bR.onClick.RemoveAllListeners();
@@ -184,26 +184,26 @@ public class buttonController : MonoBehaviour
     {
         if (fireRate < 0)
         {
-            if (PlayerController.Instance.fireRate - Mathf.Abs(fireRate) <= 0.1f)
+            if (PlayerFpsController.Instance.fireRate - Mathf.Abs(fireRate) <= 0.1f)
             {
                 return;
             }
         }
-        PlayerController.Instance.fireRate += fireRate;
+        PlayerFpsController.Instance.fireRate += fireRate;
     }
 
     public void SpeedSet(float moveSpeed)
     {
-        if (PlayerController.Instance.moveSpeed <= Mathf.Abs(moveSpeed))
+        if (PlayerFpsController.Instance.moveSpeed <= Mathf.Abs(moveSpeed))
         {
             return;
         }
-        PlayerController.Instance.moveSpeed += moveSpeed;
+        PlayerFpsController.Instance.moveSpeed += moveSpeed;
     }
 
-    public void BarrelSet(PlayerController.BarrelCount barrel)
+    public void BarrelSet(PlayerFpsController.BarrelCount barrel)
     {
-        PlayerController.Instance.barrelCount = barrel;
+        PlayerFpsController.Instance.barrelCount = barrel;
     }
 
     public void SetHealth(int health)
@@ -220,7 +220,7 @@ public class buttonController : MonoBehaviour
         if (playerHealth.currentHealth > playerHealth.maxHealth)
         {
             playerHealth.maxHealth = playerHealth.currentHealth;
-            PlayerController.Instance.sliderMax();
+            PlayerFpsController.Instance.sliderMax();
         }
     }
 
@@ -228,12 +228,12 @@ public class buttonController : MonoBehaviour
     {
         if (xpGain < 0)
         {
-            if (PlayerController.Instance.xpGain < Mathf.Abs(xpGain))
+            if (PlayerFpsController.Instance.xpGain < Mathf.Abs(xpGain))
             {
                 return;
             }
         }
-        PlayerController.Instance.xpGain += xpGain;
+        PlayerFpsController.Instance.xpGain += xpGain;
     }
     public void SetGameSpeed()
     {
@@ -249,12 +249,12 @@ public class buttonController : MonoBehaviour
     {
         if (dmg < 0)
         {
-            if (objectPool.SharedInstance.pooledObjects[0].GetComponent<Damage>().damage < Mathf.Abs(dmg))
+            if (ObjectPool.SharedInstance.pooledObjects[0].GetComponent<Damage>().damage < Mathf.Abs(dmg))
             {
                 return;
             }
         }
-        foreach (var item in objectPool.SharedInstance.pooledObjects)
+        foreach (var item in ObjectPool.SharedInstance.pooledObjects)
         {
             item.GetComponent<Damage>().damage += dmg;
         }

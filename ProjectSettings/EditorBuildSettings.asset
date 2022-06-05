@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TpsDeneme.unity
-    guid: e39d1ace82ae6a04190a7a45d07dc7b3
+    path: Assets/Scenes/FPSDeneme.unity
+    guid: 28b6b68fdf5482049992b66debb244df
   m_configObjects: {}

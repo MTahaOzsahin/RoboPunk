@@ -11,7 +11,7 @@ namespace Kajujam.Concrates.ExtensionMethods
         
         public static bool HasHitPlayer(this Collision collision)
         {
-            return collision.collider.GetComponent<PlayerController>() != null;
+            return collision.collider.GetComponent<PlayerFpsController>() != null;
         }
         public static bool HasHitEnemy(this Collision collision)
         {
@@ -19,7 +19,7 @@ namespace Kajujam.Concrates.ExtensionMethods
         }
         public static bool HasHitBullet(this Collision collision)
         {
-            return collision.collider.GetComponent<bullet>();
+            return collision.collider.GetComponent<Bullet>();
         }
         public static Health ObjectHasHealth(this Collision collision)
         {

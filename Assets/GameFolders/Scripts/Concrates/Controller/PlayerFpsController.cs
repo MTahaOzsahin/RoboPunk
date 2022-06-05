@@ -1,7 +1,5 @@
-using Kajujam.Abstracts.Inputs;
 using Kajujam.Concrates.Combats;
 using Kajujam.Concrates.ExtensionMethods;
-using Kajujam.Concrates.Inputs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +10,9 @@ using UnityEngine.UI;
 namespace Kajujam.Concrates.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : Singleton<PlayerController>
+    public class PlayerFpsController : Singleton<PlayerFpsController>
     {
-        IPlayerInputs pcInputs;
+
         Health health;
         Damage damage;
         ObjectPool objPool;
@@ -25,7 +23,7 @@ namespace Kajujam.Concrates.Controller
         public bool shoot = true;
         float playerLevel;
         float experience;
-        public  float experienceToNextLevel = 100;
+        public float experienceToNextLevel = 100;
         public Slider slider;
 
 
@@ -70,9 +68,7 @@ namespace Kajujam.Concrates.Controller
 
 
         [SerializeField] public float moveSpeed;
-        float horizontal;
-        float vertical;
-
+       
         private void Awake()
         {
             //pcInputs = new PCInputs();
@@ -114,121 +110,29 @@ namespace Kajujam.Concrates.Controller
                 uiElement.SetActive(true);
             }
         }
-        void GetAxis()
-        {
-            //horizontal = pcInputs.Horizontal;
-            //vertical = pcInputs.Vertical;
-        }
-        public void Movement(float horizontal)
-        {
-            //GetAxis();
-            //if (!health.IsDead)
-            //{
-            //    transform.position += Vector3.right * horizontal * Time.deltaTime * moveSpeed;
-            //    transform.position += Vector3.forward * vertical * Time.deltaTime * moveSpeed;
-            //}
-        }
-
-        public void MovementAndRotation()
-        {
-            //GetAxis();
-
-            //Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-            //float turnSmoothTime = 0.1f;
-
-
-            //if (direction.magnitude >= 0.1f && !health.IsDead)
-            //{
-            //    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            //    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            //    transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            //    Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            //    transform.position += moveDirection.normalized * Time.deltaTime * moveSpeed;
-
-            //}
-
-
-
-
-            //if (Time.timeScale > 0)
-            //{
-            //    if (Input.GetMouseButton(0))
-            //    {
-            //        Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //        RaycastHit hitInfo;
-            //        if (Physics.Raycast(rayOrigin, out hitInfo))
-            //        {
-            //            if (hitInfo.collider != null)
-            //            {
-            //                Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-            //                transform.LookAt(newP);
-            //            }
-            //        }
-            //    }
-            //}
-            //if (Time.timeScale > 0)
-            //{
-            //    Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit hitInfo;
-            //    if (Physics.Raycast(rayOrigin, out hitInfo))
-            //    {
-            //        if (hitInfo.collider != null)
-            //        {
-            //            Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-            //            transform.LookAt(newP);
-            //        }
-            //    }
-            //}
-            //if (Time.timeScale > 0)
-            //{
-            //    Ray rayOrigin = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-            //    RaycastHit hitPoint;
-
-            //    if (Physics.Raycast(rayOrigin, out hitPoint))
-            //    {
-            //        if (hitPoint.collider != null)
-            //        {
-            //            transform.LookAt(hitPoint.point);
-            //        }
-            //    }
-            //}
-        }
+       
         public void PlayerControlsInputSystem()
         {
-            //groundedPlayer = controller.isGrounded;
-            if (/*groundedPlayer && */ playerVelocity.y < 0)
+            
+            if ( playerVelocity.y < 0)
             {
                 playerVelocity.y = 0f;
             }
 
             Vector2 movement = inputManager.GetPLayerMovement();
-            Vector3 move = new Vector3(movement.x , 0f , movement.y);
+            Vector3 move = new Vector3(movement.x, 0f, movement.y);
             move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
             move.y = 0f;
             characterController.Move(move * Time.deltaTime * playerSpeed);
-            //Vector2 look = new Vector2(0,inputManager.GetMouseDelta().y);
-            //transform.LookAt(look);
+            transform.SetPositionAndRotation(transform.position, cameraTransform.rotation);
 
-            //transform.rotation = Quaternion(cameraTransform.rotation)
-            
-          
-            //if (move != Vector3.zero)
-            //{
-            //    gameObject.transform.forward = move;
-            //}
-
-            // Changes the height position of the player..
-            //if (Input.GetButtonDown("Jump") && groundedPlayer)
-            //{
-            //    playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            //}
 
             playerVelocity.y += gravityValue * Time.deltaTime;
             characterController.Move(playerVelocity * Time.deltaTime);
+
+            Cursor.lockState = CursorLockMode.Confined; // keep confined in the game window
+            
+            
         }
         public void FireBullet()
         {
@@ -237,7 +141,7 @@ namespace Kajujam.Concrates.Controller
             GameObject bullets2;
             GameObject bullets3;
 
-           
+
             if (timer > fireRate)
             {
                 shoot = true;

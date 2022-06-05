@@ -10,7 +10,7 @@ namespace Kajujam.Concrates.Controller
     {
         Health health;
         Damage damage;
-        [SerializeField] GameObject playerGameObject;
+        
 
 
 
@@ -32,7 +32,9 @@ namespace Kajujam.Concrates.Controller
 
         private void XpGainOnDead()
         {
-            PlayerController.Instance.exp += PlayerController.Instance.xpGain;
+            //PlayerController.Instance.exp += PlayerController.Instance.xpGain;
+            PlayerFpsController.Instance.exp += PlayerFpsController.Instance.xpGain;
+
         }
 
         public void OnEnemyDead()

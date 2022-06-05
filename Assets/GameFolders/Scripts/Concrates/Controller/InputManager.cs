@@ -46,5 +46,9 @@ namespace Kajujam.Concrates.Controller
         {
             return playerControls.Player.Look.ReadValue<Vector2>();
         }
+        public bool GetMouseLeftClick()
+        {
+            return playerControls.Player.Shoot.IsPressed();
+        }
     }
 }

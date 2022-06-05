@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kajujam.Concrates.Controller;
 
-public class enemyAnimController : MonoBehaviour
+public class EnemyAnimController : MonoBehaviour
 {
     public Animator enemyAnimator;
     Health healt;

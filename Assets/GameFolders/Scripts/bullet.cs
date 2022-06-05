@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kajujam.Concrates.Combats;
 
-public class bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
 
-    Health health;
-    Damage damage;
+   
 
     bool coroutineIsFinished = true;
     public float moveSpeed = 5f;
@@ -18,14 +17,12 @@ public class bullet : MonoBehaviour
    
     private void Awake()
     {
-        health = GetComponent<Health>();
-        damage = GetComponent<Damage>();
+       
     }
     
     void Update()
     {
         Fire();
-        //transform.localPosition += transform.forward * moveSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -64,7 +61,6 @@ public class bullet : MonoBehaviour
     IEnumerator Deactivate()
 
     {
-        //GetPlayerLocation();
         coroutineIsFinished = false;
 
         yield return new WaitForSeconds(deadRate); //will wait 5seconds before continuing
@@ -73,25 +69,6 @@ public class bullet : MonoBehaviour
         coroutineIsFinished = true;
        
 
-    }
-    void GetPlayerLocation()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(rayOrigin, out hitInfo))
-            {
-                if (hitInfo.collider != null)
-                {
-                    Vector3 newP = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-                    transform.LookAt(newP);
-
-
-                }
-            }
-
-        }
     }
     void Fire()
     {
